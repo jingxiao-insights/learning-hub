@@ -1,21 +1,18 @@
-/* === Google Fonts === */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
 /* === Custom Properties === */
 :root {
-  --primary:       #2D6A4F;
-  --primary-dark:  #1B4332;
-  --primary-light: #40916C;
-  --accent:        #52B788;
-  --accent-light:  #74C69D;
-  --green-50:      #F0FDF4;
-  --green-100:     #DCFCE7;
-  --green-200:     #BBF7D0;
+  --primary:       #2A9D78;
+  --primary-dark:  #1A7A5A;
+  --primary-light: #3EB98F;
+  --accent:        #62DDB0;
+  --accent-light:  #90ECC8;
+  --green-50:      #F0FFF9;
+  --green-100:     #C8F7E8;
+  --green-200:     #96EDD1;
 
-  --bg:            #F6FBF8;
+  --bg:            #F2FDF9;
   --surface:       #FFFFFF;
-  --border:        #E2F0E8;
-  --border-hover:  #B7DFCA;
+  --border:        #C8F0E4;
+  --border-hover:  #8ADFC0;
 
   --text:          #1A2E22;
   --text-muted:    #4E7260;
@@ -34,10 +31,10 @@
   --s1-dot:    #F59E0B;
 
   /* Status: mastered */
-  --s2-bg:     #F0FDF4;
-  --s2-border: #86EFAC;
-  --s2-text:   #166534;
-  --s2-dot:    #22C55E;
+  --s2-bg:     #EDFFF8;
+  --s2-border: #62DDB0;
+  --s2-text:   #0F6B4A;
+  --s2-dot:    #2ACA8A;
 
   --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
   --shadow:    0 2px 6px rgba(0,0,0,.07), 0 1px 3px rgba(0,0,0,.05);
@@ -54,7 +51,7 @@
   --transition: 150ms ease;
   --transition-md: 250ms ease;
 
-  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font: 'Charis SIL', Georgia, 'Times New Roman', serif;
 }
 
 /* === Reset === */
