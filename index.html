@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jingxiao Li — AI × ESG × Product Owner Freelance</title>
-  <meta name="description" content="Consultante freelance spécialisée à l'intersection de l'Intelligence Artificielle, l'ESG et le Product Management. Disponible pour vos projets en France." />
+  <title>Jingxiao Li — AI × ESG × PO × GEO Freelance</title>
+  <meta name="description" content="Consultante freelance spécialisée à l'intersection de l'Intelligence Artificielle, l'ESG, le Product Management et le GEO." />
   <link rel="stylesheet" href="style.css" />
+  <script src="i18n/fr.js"></script>
+  <script src="i18n/en.js"></script>
+  <script src="i18n/de.js"></script>
 </head>
 <body>
 
@@ -13,12 +16,17 @@
   <nav class="nav">
     <div class="container nav-inner">
       <a href="index.html" class="nav-logo">
-        Jingxiao Li <span>·</span> AI × ESG × PO
+        Jingxiao Li <span>·</span> AI × ESG × PO × GEO
       </a>
       <div class="nav-links">
         <a href="#services" class="nav-link">Services</a>
-        <a href="#about"    class="nav-link">À propos</a>
-        <a href="hub.html"  class="nav-cta">Learning Hub →</a>
+        <a href="#about"    class="nav-link" data-i18n="nav_about">À propos</a>
+        <a href="hub.html"  class="nav-cta"  data-i18n="nav_cta">Learning Hub →</a>
+        <div class="lang-switcher">
+          <button class="lang-btn" data-lang="fr">FR</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="de">DE</button>
+        </div>
       </div>
     </div>
   </nav>
@@ -27,21 +35,21 @@
   <section class="hero">
     <div class="container hero-inner">
       <div class="hero-content">
-        <div class="hero-eyebrow">🌱 Freelance · Paris & Remote</div>
-        <h1 class="hero-title">Product Owner<br>à l'ère de l'IA<br>&amp; de l'ESG</h1>
-        <p class="hero-subtitle">
-          Je transforme des enjeux complexes — données ESG, systèmes IA, obligations réglementaires —
-          en produits numériques stratégiques et actionnables.
+        <div class="hero-eyebrow" data-i18n="hero_eyebrow">🌱 Freelance · Paris & Remote</div>
+        <h1 class="hero-title" data-i18n="hero_title">Product Owner,<br>IA, ESG<br>&amp; GEO</h1>
+        <p class="hero-subtitle" data-i18n="hero_subtitle">
+          Je transforme des enjeux complexes — données ESG, systèmes IA, obligations réglementaires,
+          visibilité dans les moteurs IA — en stratégies et produits numériques actionnables.
         </p>
         <div class="hero-actions">
-          <a href="hub.html" class="btn btn-primary btn-lg">Découvrir le Learning Hub</a>
-          <a href="mailto:jingxiao.li@gnomondigital.com" class="btn btn-outline btn-lg">Me contacter</a>
+          <a href="hub.html" class="btn btn-primary btn-lg" data-i18n="hero_cta1">Découvrir le Learning Hub</a>
+          <a href="mailto:jingxiao.li@gnomondigital.com" class="btn btn-outline btn-lg" data-i18n="hero_cta2">Me contacter</a>
         </div>
       </div>
 
       <div class="hero-visual">
         <div class="hero-card">
-          <div class="hero-card-title">Domaines d'expertise</div>
+          <div class="hero-card-title" data-i18n="hero_card_title">Domaines d'expertise</div>
           <div class="hero-stat">
             <div class="hero-stat-icon green">🎯</div>
             <div class="hero-stat-text">
@@ -52,22 +60,22 @@
           <div class="hero-stat">
             <div class="hero-stat-icon green">🌿</div>
             <div class="hero-stat-text">
-              <strong>ESG & Réglementation</strong>
-              <span>CSRD/ESRS, Taxonomie UE, SFDR</span>
+              <strong data-i18n="stat2_title">ESG & Réglementation</strong>
+              <span data-i18n="stat2_sub">CSRD/ESRS, Taxonomie UE, SFDR</span>
             </div>
           </div>
           <div class="hero-stat">
             <div class="hero-stat-icon amber">🤖</div>
             <div class="hero-stat-text">
-              <strong>Intelligence Artificielle</strong>
-              <span>LLM, Gouvernance IA, EU AI Act</span>
+              <strong data-i18n="stat3_title">Intelligence Artificielle</strong>
+              <span data-i18n="stat3_sub">LLM, Gouvernance IA, EU AI Act</span>
             </div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-icon blue">📊</div>
+            <div class="hero-stat-icon blue">🔍</div>
             <div class="hero-stat-text">
-              <strong>Data & Plateformes</strong>
-              <span>Architecture, Intégration, Qualité</span>
+              <strong data-i18n="stat4_title">GEO & Visibilité IA</strong>
+              <span data-i18n="stat4_sub">ChatGPT, Perplexity, AI Overviews</span>
             </div>
           </div>
         </div>
@@ -79,19 +87,16 @@
   <section class="section" id="services">
     <div class="container">
       <div class="section-header">
-        <div class="section-eyebrow">⚡ Ce que je fais</div>
-        <h2>Trois leviers de valeur</h2>
-        <p>Une approche intégrée pour les organisations qui naviguent entre transformation IA, conformité ESG et excellence produit.</p>
+        <div class="section-eyebrow" data-i18n="services_eyebrow">⚡ Ce que je fais</div>
+        <h2 data-i18n="services_title">Quatre leviers de valeur</h2>
+        <p data-i18n="services_desc">Une approche intégrée pour les organisations qui naviguent entre transformation IA, conformité ESG, excellence produit et visibilité dans les moteurs IA.</p>
       </div>
 
-      <div class="services-grid">
+      <div class="services-grid" style="grid-template-columns: repeat(2, 1fr);">
         <div class="service-card">
           <div class="service-icon">🎯</div>
           <h3>Product Ownership</h3>
-          <p>
-            Définition de roadmap, priorisation du backlog, facilitation des cérémonies Agile
-            et alignement continu entre vision business et livraisons techniques.
-          </p>
+          <p data-i18n="s1_desc">Définition de roadmap, priorisation du backlog, facilitation des cérémonies Agile et alignement continu entre vision business et livraisons techniques.</p>
           <div class="service-tags">
             <span class="service-tag">Scrum / SAFe</span>
             <span class="service-tag">User Stories</span>
@@ -102,11 +107,8 @@
 
         <div class="service-card">
           <div class="service-icon">🌿</div>
-          <h3>ESG & Conformité CSRD</h3>
-          <p>
-            Accompagnement sur la double matérialité, structuration des données ESG,
-            sélection d'outils de reporting et préparation aux exigences CSRD/ESRS.
-          </p>
+          <h3 data-i18n="s2_title">ESG & Conformité CSRD</h3>
+          <p data-i18n="s2_desc">Accompagnement sur la double matérialité, structuration des données ESG, sélection d'outils de reporting et préparation aux exigences CSRD/ESRS.</p>
           <div class="service-tags">
             <span class="service-tag">CSRD / ESRS</span>
             <span class="service-tag">Taxonomie UE</span>
@@ -117,16 +119,25 @@
 
         <div class="service-card">
           <div class="service-icon">🤖</div>
-          <h3>Intégration IA</h3>
-          <p>
-            Cadrage de cas d'usage LLM, évaluation et sélection de solutions IA,
-            gouvernance responsable et mise en conformité avec l'EU AI Act.
-          </p>
+          <h3 data-i18n="s3_title">Intégration IA</h3>
+          <p data-i18n="s3_desc">Cadrage de cas d'usage LLM, évaluation et sélection de solutions IA, gouvernance responsable et mise en conformité avec l'EU AI Act.</p>
           <div class="service-tags">
             <span class="service-tag">LLM / RAG</span>
             <span class="service-tag">EU AI Act</span>
             <span class="service-tag">Prompt Eng.</span>
             <span class="service-tag">Évaluation SaaS</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🔍</div>
+          <h3 data-i18n="s4_title">GEO — Visibilité dans les IA</h3>
+          <p data-i18n="s4_desc">Stratégie de contenu et d'autorité pour apparaître dans les réponses de ChatGPT, Perplexity et Google AI Overviews. Le SEO de demain, aujourd'hui.</p>
+          <div class="service-tags">
+            <span class="service-tag">AI Overviews</span>
+            <span class="service-tag">Perplexity</span>
+            <span class="service-tag">Entités & Schema</span>
+            <span class="service-tag">LLM Monitoring</span>
           </div>
         </div>
       </div>
@@ -139,24 +150,17 @@
       <div class="about-inner">
         <div class="about-avatar">🌱</div>
         <div class="about-content">
-          <div class="section-eyebrow" style="margin-bottom: .875rem;">👋 À propos</div>
-          <h2>Une triple expertise rare sur le marché français</h2>
-          <p>
-            Je combine une solide expérience en Product Management avec une maîtrise des enjeux
-            ESG et une compréhension technique des systèmes IA — une combinaison particulièrement
-            recherchée dans un contexte de transition durable accélérée par la technologie.
-          </p>
-          <p>
-            Mon approche : comprendre les contraintes réglementaires comme le CSRD, les traduire
-            en exigences produit actionnables, et piloter des équipes pluridisciplinaires pour
-            livrer de la valeur mesurable.
-          </p>
+          <div class="section-eyebrow" style="margin-bottom: .875rem;" data-i18n="about_eyebrow">👋 À propos</div>
+          <h2 data-i18n="about_title">Une triple expertise rare sur le marché français</h2>
+          <p data-i18n="about_p1">Je combine une solide expérience en Product Management avec une maîtrise des enjeux ESG et une compréhension technique des systèmes IA — une combinaison particulièrement recherchée dans un contexte de transition durable accélérée par la technologie.</p>
+          <p data-i18n="about_p2">Mon approche : comprendre les contraintes réglementaires (CSRD), les enjeux IA (EU AI Act), la visibilité dans les moteurs génératifs (GEO), et les traduire en exigences produit actionnables pour des équipes pluridisciplinaires.</p>
           <div class="about-chips">
             <span class="about-chip">🇫🇷 Marché français</span>
             <span class="about-chip">🌍 Remote-friendly</span>
             <span class="about-chip">🏦 Finance & Assurance</span>
             <span class="about-chip">🏗️ Industrie</span>
-            <span class="about-chip">🎓 Bilingue FR/EN</span>
+            <span class="about-chip">🔍 GEO & AI Search</span>
+            <span class="about-chip">🎓 FR / EN / DE</span>
           </div>
         </div>
       </div>
@@ -166,13 +170,11 @@
   <!-- CTA Banner -->
   <section class="cta-banner">
     <div class="container">
-      <h2>Vous avez un projet ESG, IA ou Produit ?</h2>
-      <p>Discutons de vos enjeux et voyons comment je peux vous aider à avancer.</p>
+      <h2 data-i18n="cta_title">Vous avez un projet ESG, IA ou Produit ?</h2>
+      <p data-i18n="cta_desc">Discutons de vos enjeux et voyons comment je peux vous aider à avancer.</p>
       <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-        <a href="mailto:jingxiao.li@gnomondigital.com" class="btn btn-white btn-lg">📬 Me contacter</a>
-        <a href="hub.html" class="btn btn-outline btn-lg" style="border-color:rgba(255,255,255,.5);color:#fff;">
-          Explorer mon Learning Hub →
-        </a>
+        <a href="mailto:jingxiao.li@gnomondigital.com" class="btn btn-white btn-lg" data-i18n="cta_btn1">📬 Me contacter</a>
+        <a href="hub.html" class="btn btn-outline btn-lg" style="border-color:rgba(255,255,255,.5);color:#fff;" data-i18n="cta_btn2">Explorer mon Learning Hub →</a>
       </div>
     </div>
   </section>
@@ -180,14 +182,18 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container footer-inner">
-      <div class="footer-logo">Jingxiao Li <span>· AI × ESG × PO</span></div>
+      <div class="footer-logo">Jingxiao Li <span>· AI × ESG × PO × GEO</span></div>
       <div class="footer-links">
-        <a href="hub.html">Learning Hub</a>
-        <a href="mailto:jingxiao.li@gnomondigital.com">Contact</a>
+        <a href="hub.html"   data-i18n="footer_hubs">Learning Hubs</a>
+        <a href="mailto:jingxiao.li@gnomondigital.com" data-i18n="footer_contact">Contact</a>
         <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
   </footer>
 
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', initLangSwitcher);
+  </script>
 </body>
 </html>

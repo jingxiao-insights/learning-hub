@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Learning Hub — Jingxiao Li</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="i18n/fr.js"></script>
+  <script src="i18n/en.js"></script>
+  <script src="i18n/de.js"></script>
 </head>
 <body>
 
@@ -12,40 +15,41 @@
   <nav class="nav">
     <div class="container nav-inner">
       <a href="index.html" class="nav-logo">
-        Jingxiao Li <span>·</span> AI × ESG × PO
+        Jingxiao Li <span>·</span> AI × ESG × PO × GEO
       </a>
       <div class="nav-links">
-        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="index.html" class="nav-link" data-i18n="nav_home">Accueil</a>
         <a href="hub.html"   class="nav-link active">Learning Hubs</a>
+        <div class="lang-switcher">
+          <button class="lang-btn" data-lang="fr">FR</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="de">DE</button>
+        </div>
       </div>
     </div>
   </nav>
 
-  <!-- Dynamic content injected here -->
+  <!-- Dynamic content -->
   <div id="hub-root">
     <div class="hub-loading section">
       <div class="spinner"></div>
-      <p style="color:var(--text-muted)">Chargement du Hub…</p>
+      <p style="color:var(--text-muted)" data-i18n="hub_loading">Chargement du Hub…</p>
     </div>
   </div>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="container footer-inner">
-      <div class="footer-logo">Jingxiao Li <span>· AI × ESG × PO</span></div>
+      <div class="footer-logo">Jingxiao Li <span>· AI × ESG × PO × GEO</span></div>
       <div class="footer-links">
-        <a href="index.html">Accueil</a>
-        <a href="hub.html">Hubs</a>
+        <a href="index.html" data-i18n="footer_home">Accueil</a>
+        <a href="hub.html"   data-i18n="footer_hubs">Hubs</a>
       </div>
     </div>
   </footer>
 
   <script src="app.js"></script>
   <script>
-    /* ====================================================
-       Hub Detail — loads HUB_DATA from ?hub=xxx
-       ==================================================== */
-
     const params = new URLSearchParams(window.location.search);
     const HUB_ID = params.get('hub');
 
@@ -55,53 +59,52 @@
       loadScript(`data/${HUB_ID}.js`)
         .then(() => {
           if (!window.HUB_DATA || window.HUB_DATA.id !== HUB_ID) throw new Error('Data mismatch');
-          document.title = `${window.HUB_DATA.title} — Jingxiao Li`;
+          document.title = `${loc(window.HUB_DATA.title)} — Jingxiao Li`;
           render(window.HUB_DATA);
           attachEvents();
         })
         .catch(() => {
           document.getElementById('hub-root').innerHTML = `
             <div class="container hub-error section">
-              <h2>Hub introuvable</h2>
-              <p>Le hub <strong>${HUB_ID}</strong> n'existe pas encore.</p>
-              <a href="hub.html" class="btn btn-outline" style="margin-top:1.5rem">← Retour aux Hubs</a>
+              <h2>${t('error_title')}</h2>
+              <p>Le hub <strong>${HUB_ID}</strong> ${t('error_desc')}</p>
+              <a href="hub.html" class="btn btn-outline" style="margin-top:1.5rem">${t('error_back')}</a>
             </div>`;
         });
     }
 
-    /* ---- Rendering ---------------------------------------- */
+    /* ---- Rendering ---- */
 
     function render(data) {
       const allSkillIds = data.pillars.flatMap(p => p.skills.map(s => s.id));
       const overallPct  = Storage.getHubProgress(data.id, allSkillIds);
 
       const pillarProgressBars = data.pillars.map((p, i) => {
-        const ids    = p.skills.map(s => s.id);
-        const prog   = Storage.getPillarProgress(data.id, ids);
-        const color  = PILLAR_COLORS[i] || PILLAR_COLORS[0];
+        const ids  = p.skills.map(s => s.id);
+        const prog = Storage.getPillarProgress(data.id, ids);
+        const color = PILLAR_COLORS[i] || PILLAR_COLORS[0];
         return `
           <div class="pillar-mini-progress">
-            <div class="pillar-mini-label" title="${p.title}">${p.icon} ${p.title}</div>
+            <div class="pillar-mini-label" title="${loc(p.title)}">${p.icon} ${loc(p.title)}</div>
             <div class="pillar-mini-bar">
               <div class="pillar-mini-fill" style="width:${prog.pct}%;background:${color}"></div>
             </div>
-            <div class="pillar-mini-pct">${prog.mastered}/${prog.total} maîtrisés</div>
+            <div class="pillar-mini-pct">${prog.mastered}/${prog.total} ${t('mastered_of')}</div>
           </div>`;
       }).join('');
 
       const pillarsHTML = data.pillars.map((p, i) => renderPillar(data.id, p, i)).join('');
 
       document.getElementById('hub-root').innerHTML = `
-        <!-- Hub Hero -->
         <section class="hub-hero">
           <div class="container">
-            <a href="hub.html" class="page-back">← Tous les Hubs</a>
-            <div class="section-eyebrow" style="margin-bottom:.875rem;">📚 Learning Hub</div>
-            <h1>${data.title}</h1>
-            <p class="hub-hero-subtitle">${data.subtitle}</p>
+            <a href="hub.html" class="page-back">${t('back_btn')}</a>
+            <div class="section-eyebrow" style="margin-bottom:.875rem;">${t('hub_eyebrow')}</div>
+            <h1>${loc(data.title)}</h1>
+            <p class="hub-hero-subtitle">${loc(data.subtitle)}</p>
             <div class="progress-overview">
               <div class="progress-overview-header">
-                <span class="progress-overview-title">Progression globale</span>
+                <span class="progress-overview-title">${t('progress_title')}</span>
                 <span class="progress-overview-pct" id="overall-pct">${overallPct}%</span>
               </div>
               <div class="main-progress-bar">
@@ -113,8 +116,6 @@
             </div>
           </div>
         </section>
-
-        <!-- Pillars -->
         <section class="pillars-section">
           <div class="container">
             <div class="pillars-grid" id="pillars-grid">
@@ -128,170 +129,125 @@
       const skillsHTML = pillar.skills.map(s => renderSkillCard(hubId, s)).join('');
       const ids  = pillar.skills.map(s => s.id);
       const prog = Storage.getPillarProgress(hubId, ids);
-
       return `
         <div class="pillar-column" data-pillar-id="${pillar.id}">
           <div class="pillar-header">
             <div class="pillar-header-icon">${pillar.icon}</div>
             <div class="pillar-header-text">
-              <div class="pillar-title">${pillar.title}</div>
-              <div class="pillar-count">${prog.mastered}/${prog.total} maîtrisés</div>
+              <div class="pillar-title">${loc(pillar.title)}</div>
+              <div class="pillar-count">${prog.mastered}/${prog.total} ${t('mastered_of')}</div>
             </div>
           </div>
-          <div class="pillar-skills">
-            ${skillsHTML}
-          </div>
+          <div class="pillar-skills">${skillsHTML}</div>
         </div>`;
     }
 
     function renderSkillCard(hubId, skill) {
       const status = Storage.getStatus(hubId, skill.id);
       const note   = Storage.getNote(hubId, skill.id);
-
       const resourcesHTML = skill.resources.map(r =>
         `<li><a href="${r.url}" target="_blank" rel="noopener">${r.title}</a></li>`
       ).join('');
-
       return `
-        <div class="skill-card"
-             data-hub-id="${hubId}"
-             data-skill-id="${skill.id}"
-             data-status="${status}">
-
+        <div class="skill-card" data-hub-id="${hubId}" data-skill-id="${skill.id}" data-status="${status}">
           <div class="skill-card-header">
             <div class="skill-header-left">
-              <div class="skill-title">${skill.title}</div>
-              <div class="skill-badges">
-                ${importanceHTML(skill.importance)}
-              </div>
+              <div class="skill-title">${loc(skill.title)}</div>
+              <div class="skill-badges">${importanceHTML(skill.importance)}</div>
             </div>
             <div class="skill-header-right">
-              <button class="status-btn" title="Cliquer pour changer le statut">
+              <button class="status-btn" title="${t('status_btn_title')}">
                 ${statusHTML(status)}
               </button>
               <span class="expand-icon">▼</span>
             </div>
           </div>
-
           <div class="skill-detail" hidden>
-            <p class="skill-description">${skill.description}</p>
-
+            <p class="skill-description">${loc(skill.description)}</p>
             <div class="skill-resources">
-              <h4>Ressources recommandées</h4>
+              <h4>${t('resources_title')}</h4>
               <ul>${resourcesHTML}</ul>
             </div>
-
             <div class="skill-notes">
-              <h4>Notes personnelles</h4>
-              <textarea
-                class="notes-textarea"
-                placeholder="Ajoutez vos notes, liens, réflexions…"
-                rows="3">${escapeHTML(note)}</textarea>
+              <h4>${t('notes_title')}</h4>
+              <textarea class="notes-textarea" placeholder="${t('notes_placeholder')}" rows="3">${escapeHTML(note)}</textarea>
             </div>
           </div>
         </div>`;
     }
 
-    /* ---- Events ------------------------------------------ */
+    /* ---- Events ---- */
 
     function attachEvents() {
       const root = document.getElementById('hub-root');
-
-      /* Status button: cycle status */
       root.addEventListener('click', e => {
         const statusBtn = e.target.closest('.status-btn');
         if (statusBtn) {
           e.stopPropagation();
-          const card = statusBtn.closest('.skill-card');
-          cycleStatus(card);
+          cycleStatus(statusBtn.closest('.skill-card'));
           return;
         }
-
-        /* Card header: toggle detail */
         const header = e.target.closest('.skill-card-header');
         if (header) {
           const card   = header.closest('.skill-card');
           const detail = card.querySelector('.skill-detail');
-          const isHidden = detail.hidden;
-          detail.hidden = !isHidden;
-          card.classList.toggle('expanded', isHidden);
-          return;
+          detail.hidden = !detail.hidden;
+          card.classList.toggle('expanded', !detail.hidden);
         }
       });
-
-      /* Notes: auto-save on input */
       root.addEventListener('input', e => {
         if (!e.target.matches('.notes-textarea')) return;
         const card = e.target.closest('.skill-card');
-        const { hubId, skillId } = card.dataset;
-        Storage.setNote(hubId, skillId, e.target.value);
+        Storage.setNote(card.dataset.hubId, card.dataset.skillId, e.target.value);
       });
     }
 
     function cycleStatus(card) {
-      const hubId   = card.dataset.hubId;
-      const skillId = card.dataset.skillId;
-      const current = parseInt(card.dataset.status, 10);
-      const next    = (current + 1) % 3;
-
+      const next = (parseInt(card.dataset.status, 10) + 1) % 3;
       card.dataset.status = next;
-      Storage.setStatus(hubId, skillId, next);
-
-      const btn = card.querySelector('.status-btn');
-      btn.innerHTML = statusHTML(next);
-
-      refreshProgress(hubId);
+      Storage.setStatus(card.dataset.hubId, card.dataset.skillId, next);
+      card.querySelector('.status-btn').innerHTML = statusHTML(next);
+      refreshProgress(card.dataset.hubId);
     }
 
     function refreshProgress(hubId) {
       const data = window.HUB_DATA;
       if (!data) return;
-
       const allSkillIds = data.pillars.flatMap(p => p.skills.map(s => s.id));
-      const overallPct  = Storage.getHubProgress(hubId, allSkillIds);
-
+      const pct = Storage.getHubProgress(hubId, allSkillIds);
       const pctEl  = document.getElementById('overall-pct');
       const fillEl = document.getElementById('overall-fill');
-      if (pctEl)  pctEl.textContent = `${overallPct}%`;
-      if (fillEl) fillEl.style.width = `${overallPct}%`;
+      if (pctEl)  pctEl.textContent = `${pct}%`;
+      if (fillEl) fillEl.style.width = `${pct}%`;
 
-      /* Refresh per-pillar progress counters */
       data.pillars.forEach(p => {
-        const col  = document.querySelector(`.pillar-column[data-pillar-id="${p.id}"]`);
+        const col = document.querySelector(`.pillar-column[data-pillar-id="${p.id}"]`);
+
         if (!col) return;
-
-        const ids  = p.skills.map(s => s.id);
-        const prog = Storage.getPillarProgress(hubId, ids);
-
+        const prog = Storage.getPillarProgress(hubId, p.skills.map(s => s.id));
         const countEl = col.querySelector('.pillar-count');
-        if (countEl) countEl.textContent = `${prog.mastered}/${prog.total} maîtrisés`;
+        if (countEl) countEl.textContent = `${prog.mastered}/${prog.total} ${t('mastered_of')}`;
       });
 
-      /* Refresh mini progress bars */
       const barsEl = document.getElementById('pillar-bars');
       if (barsEl) {
         barsEl.querySelectorAll('.pillar-mini-progress').forEach((el, i) => {
-          const p    = data.pillars[i];
+          const p = data.pillars[i];
           if (!p) return;
-          const ids  = p.skills.map(s => s.id);
-          const prog = Storage.getPillarProgress(hubId, ids);
-          const fill = el.querySelector('.pillar-mini-fill');
+          const prog  = Storage.getPillarProgress(hubId, p.skills.map(s => s.id));
+          const fill  = el.querySelector('.pillar-mini-fill');
           const pctEl = el.querySelector('.pillar-mini-pct');
           if (fill)  fill.style.width = `${prog.pct}%`;
-          if (pctEl) pctEl.textContent = `${prog.mastered}/${prog.total} maîtrisés`;
+          if (pctEl) pctEl.textContent = `${prog.mastered}/${prog.total} ${t('mastered_of')}`;
         });
       }
     }
 
-    /* ---- Utils ------------------------------------------- */
-
     function escapeHTML(str) {
-      return str
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
+
+    document.addEventListener('DOMContentLoaded', initLangSwitcher);
   </script>
 </body>
 </html>

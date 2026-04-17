@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Learning Hubs — Jingxiao Li</title>
-  <meta name="description" content="Choisissez un Learning Hub pour suivre votre progression de compétences." />
   <link rel="stylesheet" href="style.css" />
+  <script src="i18n/fr.js"></script>
+  <script src="i18n/en.js"></script>
+  <script src="i18n/de.js"></script>
 </head>
 <body>
 
@@ -13,11 +15,16 @@
   <nav class="nav">
     <div class="container nav-inner">
       <a href="index.html" class="nav-logo">
-        Jingxiao Li <span>·</span> AI × ESG × PO
+        Jingxiao Li <span>·</span> AI × ESG × PO × GEO
       </a>
       <div class="nav-links">
-        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="index.html" class="nav-link" data-i18n="nav_home">Accueil</a>
         <a href="hub.html"   class="nav-link active">Learning Hubs</a>
+        <div class="lang-switcher">
+          <button class="lang-btn" data-lang="fr">FR</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="de">DE</button>
+        </div>
       </div>
     </div>
   </nav>
@@ -25,9 +32,9 @@
   <!-- Header -->
   <section class="section-sm" style="background: linear-gradient(135deg, var(--green-50), #fff); border-bottom: 1px solid var(--border);">
     <div class="container">
-      <div class="section-eyebrow" style="margin-bottom:.875rem;">📚 Compétences</div>
+      <div class="section-eyebrow" style="margin-bottom:.875rem;" data-i18n="hub_page_eyebrow">📚 Compétences</div>
       <h1 style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: .75rem;">Learning Hubs</h1>
-      <p style="font-size:1.0625rem; max-width:560px;">
+      <p style="font-size:1.0625rem; max-width:560px;" data-i18n="hub_page_desc">
         Chaque Hub regroupe un ensemble de compétences structurées autour d'un domaine.
         Suivez votre progression, ajoutez vos notes et accédez aux ressources recommandées.
       </p>
@@ -37,32 +44,29 @@
   <!-- Hubs Grid -->
   <section class="section-sm">
     <div class="container">
-      <div class="hubs-grid" id="hubs-grid">
-        <!-- Rendered by JS -->
-      </div>
+      <div class="hubs-grid" id="hubs-grid"></div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="container footer-inner">
-      <div class="footer-logo">Jingxiao Li <span>· AI × ESG × PO</span></div>
+      <div class="footer-logo">Jingxiao Li <span>· AI × ESG × PO × GEO</span></div>
       <div class="footer-links">
-        <a href="index.html">Accueil</a>
-        <a href="mailto:jingxiao.li@gnomondigital.com">Contact</a>
+        <a href="index.html" data-i18n="footer_home">Accueil</a>
+        <a href="mailto:jingxiao.li@gnomondigital.com" data-i18n="footer_contact">Contact</a>
       </div>
     </div>
   </footer>
 
   <script src="app.js"></script>
   <script>
-    /* Hub registry: add entries here when new hubs are created */
     const HUBS_REGISTRY = [
       {
         id: 'esg-ai-po',
         title: 'AI × ESG × PO',
         subtitle: 'Learning Hub',
-        description: 'Compétences pour un Product Owner freelance à l\'intersection de l\'IA, de l\'ESG et de l\'Agile. Trois piliers : Produit, Réglementation, Technologie.',
+        descKey: 'hub1_desc',
         icon: '🌱',
         available: true,
         dataFile: 'data/esg-ai-po.js'
@@ -71,10 +75,19 @@
         id: 'geo',
         title: 'GEO',
         subtitle: 'Learning Hub',
-        description: 'Generative Engine Optimization — Se positionner dans les moteurs de recherche à l\'ère des IA génératives (ChatGPT, Perplexity, Gemini…).',
+        descKey: 'hub2_desc',
         icon: '🔍',
-        available: false,
-        dataFile: null
+        available: true,
+        dataFile: 'data/geo.js'
+      },
+      {
+        id: 'communication',
+        title: 'Communication & Influence',
+        subtitle: 'Learning Hub',
+        descKey: 'hub3_desc',
+        icon: '🗣️',
+        available: true,
+        dataFile: 'data/communication.js'
       }
     ];
 
@@ -86,39 +99,36 @@
         if (!data || data.id !== hub.id) return null;
         const allSkillIds = data.pillars.flatMap(p => p.skills.map(s => s.id));
         return Storage.getHubProgress(hub.id, allSkillIds);
-      } catch {
-        return null;
-      }
+      } catch { return null; }
     }
 
     function renderHubCard(hub, pct) {
+      const desc = t(hub.descKey);
       if (!hub.available) {
         return `
           <div class="hub-card coming-soon">
-            <span class="coming-soon-badge">Bientôt</span>
+            <span class="coming-soon-badge">${t('coming_soon_badge')}</span>
             <div class="hub-card-icon">${hub.icon}</div>
             <h3>${hub.title}</h3>
             <div class="hub-card-subtitle">${hub.subtitle}</div>
-            <p>${hub.description}</p>
+            <p>${desc}</p>
             <div class="hub-card-footer">
-              <span class="hub-progress-label">Disponible prochainement</span>
+              <span class="hub-progress-label">${t('coming_soon_label')}</span>
             </div>
           </div>`;
       }
-
       const pctLabel = pct !== null ? `${pct}%` : '–';
       const fillW    = pct !== null ? pct : 0;
-
       return `
         <a href="hub-detail.html?hub=${hub.id}" class="hub-card">
           <div class="hub-card-icon">${hub.icon}</div>
           <h3>${hub.title}</h3>
           <div class="hub-card-subtitle">${hub.subtitle}</div>
-          <p>${hub.description}</p>
+          <p>${desc}</p>
           <div class="hub-card-footer">
             <div style="flex:1">
               <div style="display:flex;justify-content:space-between;align-items:center">
-                <span class="hub-progress-label">Progression globale</span>
+                <span class="hub-progress-label">${t('progress_global')}</span>
                 <span class="hub-progress-value">${pctLabel}</span>
               </div>
               <div class="hub-progress-bar" style="margin-top:.5rem">
@@ -131,19 +141,20 @@
 
     async function init() {
       const grid = document.getElementById('hubs-grid');
-      grid.innerHTML = '<div class="hub-loading"><div class="spinner"></div><p>Chargement…</p></div>';
-
+      grid.innerHTML = `<div class="hub-loading"><div class="spinner"></div><p>${t('loading')}</p></div>`;
       const cards = await Promise.all(
         HUBS_REGISTRY.map(async hub => {
           const pct = await loadHubProgress(hub);
           return renderHubCard(hub, pct);
         })
       );
-
       grid.innerHTML = cards.join('');
     }
 
-    init();
+    document.addEventListener('DOMContentLoaded', () => {
+      initLangSwitcher();
+      init();
+    });
   </script>
 </body>
 </html>
