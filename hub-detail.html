@@ -145,7 +145,8 @@
     function renderSkillCard(hubId, skill) {
       const status = Storage.getStatus(hubId, skill.id);
       const note   = Storage.getNote(hubId, skill.id);
-      const resourcesHTML = skill.resources.map(r =>
+      const resList = Array.isArray(skill.resources) ? skill.resources : loc(skill.resources);
+      const resourcesHTML = (resList || []).map(r =>
         `<li><a href="${r.url}" target="_blank" rel="noopener">${r.title}</a></li>`
       ).join('');
       return `
