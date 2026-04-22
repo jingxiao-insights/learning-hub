@@ -48,6 +48,7 @@ window.I18N_EN = {
   hub1_desc: 'Skills for a freelance Product Owner at the intersection of AI, ESG and Agile. Three pillars: Product, Regulation, Technology.',
   hub2_desc: 'Generative Engine Optimization — positioning in AI search engines (ChatGPT, Perplexity, Google AI Overviews). Three pillars: Fundamentals, Content Optimisation, Measurement & Strategy.',
   hub3_desc: 'Communicate with impact in multicultural environments. Four pillars: Language Tools, Structured Expression, Influence & Meetings, Cross-cultural Communication.',
+  hub4_desc: 'The meta-skill that amplifies everything else. Four pillars: Story Foundations, Business Storytelling, Data Storytelling, Visual & Presentation.',
   progress_global:   'Overall progress',
   coming_soon_badge: 'Soon',
   coming_soon_label: 'Available soon',

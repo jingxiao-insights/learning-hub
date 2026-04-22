@@ -48,6 +48,7 @@ window.I18N_DE = {
   hub1_desc: 'Kompetenzen für einen freiberuflichen Product Owner an der Schnittstelle von KI, ESG und Agile. Drei Säulen: Produkt, Regulierung, Technologie.',
   hub2_desc: 'Generative Engine Optimization — Positionierung in KI-Suchmaschinen (ChatGPT, Perplexity, Google AI Overviews). Drei Säulen: Grundlagen, Inhaltsoptimierung, Messung & Strategie.',
   hub3_desc: 'Wirkungsvoll kommunizieren in multikulturellen Umgebungen. Vier Säulen: Sprachliche Werkzeuge, Strukturierter Ausdruck, Einfluss & Meetings, Interkulturelle Kommunikation.',
+  hub4_desc: 'Die Metakompetenz, die alles andere verstärkt. Vier Säulen: Grundlagen des Erzählens, Business Storytelling, Daten-Storytelling, Visual & Präsentation.',
   progress_global:   'Gesamtfortschritt',
   coming_soon_badge: 'Demnächst',
   coming_soon_label: 'Bald verfügbar',

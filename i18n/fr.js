@@ -48,6 +48,7 @@ window.I18N_FR = {
   hub1_desc: 'Compétences pour un Product Owner freelance à l\'intersection de l\'IA, de l\'ESG et de l\'Agile. Trois piliers : Produit, Réglementation, Technologie.',
   hub2_desc: 'Generative Engine Optimization — Se positionner dans les moteurs de recherche IA (ChatGPT, Perplexity, Google AI Overviews). Trois piliers : Fondamentaux, Optimisation de contenu, Mesure & Stratégie.',
   hub3_desc: 'Communiquer avec impact dans des environnements multiculturels. Quatre piliers : Outils linguistiques, Expression structurée, Influence & Réunions, Communication interculturelle.',
+  hub4_desc: 'La méta-compétence qui amplifie tout le reste. Quatre piliers : Fondements du récit, Storytelling business, Storytelling par les données, Visuel & Présentation.',
   progress_global:   'Progression globale',
   coming_soon_badge: 'Bientôt',
   coming_soon_label: 'Disponible prochainement',
